@@ -1,7 +1,7 @@
 const Order = require("../models/order");
 
 
-const order = async(req,res) =>{
+const createOrder = async(req,res) =>{
     try {
     let orders = [];
 
@@ -36,7 +36,7 @@ const order = async(req,res) =>{
   }
 }
 
-const orders = async(req,res) =>{
+const getOrders = async(req,res) =>{
      try {
         const orders = await Order.find().sort({ createdAt: -1 });
 
@@ -60,4 +60,31 @@ const orders = async(req,res) =>{
         res.status(500).json({ success: false, message: 'Failed to fetch orders', error });
     }
 }
-module.exports = {order,orders}
+
+// delete order
+const deleteOrder = async(req,res) => {
+    try {
+        const orderid = req.params.id
+        const deleteorder = await Order.findByIdAndDelete(orderid)
+        res.status(200).json({message:'order deleted successfully',deleteorder});
+      } catch (error) {
+        console.log('server error',error);
+      }
+}
+
+//order update
+const updateOrder =async (req,res) => {
+    try {
+    const { status } = req.body;
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+    res.json({ success: true, order: updatedOrder });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to update order" });
+  }
+}
+
+module.exports = {createOrder,getOrders,deleteOrder,updateOrder}
