@@ -9,6 +9,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const Order = require('./models/order'); 
 const menuRoutes = require('./routes/menuRoutes');
 const userRoutes = require('./routes/userRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
 
 dotenv.config();
@@ -33,11 +34,7 @@ app.get('/', (req, res) => {
     app.use('/api/auth', authRoute)
     app.use("/api/orders",orderRoutes);
     app.use('/api/users',userRoutes);
-  
-
-
-
-
+    app.use('/api/analytics',analyticsRoutes);
   
 
 const PORT = process.env.PORT || 5000;

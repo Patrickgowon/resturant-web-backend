@@ -6,10 +6,10 @@ const {createOrder,getOrders,deleteOrder,updateOrder} = require('../controllers/
 
 
 
-route.post('/ceate',createOrder);
-route.delete('/:id',deleteOrder)
+route.post('/',createOrder);
+route.delete('/:id',deleteOrder);
 route.get('/',getOrders);
-route.put('/:id',updateOrder)
+route.put('/:id',updateOrder);
 
 
 module.exports = route;
