@@ -21,7 +21,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: ['http://localhost:5174'],
+    origin: ['http://localhost:5175'],
     methods: 'GET,POST,DELETE,PUT,PATCH',
     credentials: true
 }));
@@ -32,7 +32,9 @@ app.get('/', (req, res) => {
 });
     app.use('/api/menu', menuRoutes);
     app.use('/api/auth', authRoute)
-    app.use("/api/orders",orderRoutes);
+    app.use('/api/order', require('./routes/orderRoutes'));
+    app.use('/api/orders', require('./routes/orderRoutes'));
+
     app.use('/api/users',userRoutes);
     app.use('/api/analytics',analyticsRoutes);
   
